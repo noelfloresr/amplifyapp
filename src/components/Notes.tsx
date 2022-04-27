@@ -35,6 +35,7 @@ const Notes: FC = () => {
       query: createNoteMutation,
       variables: { input: formData },
     });
+    setFormData(initialFormState);
     fetchNotes();
   };
 
