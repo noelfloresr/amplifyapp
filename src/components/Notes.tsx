@@ -1,10 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import "../App.css";
 import { listNotes } from "../graphql/queries";
-import {
-  createNote as createNoteMutation,
-  deleteNote as deleteNoteMutation,
-} from "../graphql/mutations";
+import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from "../graphql/mutations";
 import { API } from "aws-amplify";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
 
@@ -38,6 +35,7 @@ const Notes: FC = () => {
       query: createNoteMutation,
       variables: { input: formData },
     });
+    fetchNotes();
   };
 
   const deleteNote = async (id: string) => {
@@ -58,6 +56,22 @@ const Notes: FC = () => {
         placeholder="Note name"
         value={formData.name}
       />
+      <input
+        type="text"
+        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+        placeholder="Note description"
+        value={formData.description}
+      />
+      <button onClick={createNote}>Create Note</button>
+      <div style={{ marginBottom: 30 }}>
+        {notes.map((note: INote) => (
+          <div key={note.id || note.name}>
+            <h2>{note.name}</h2>
+            <p>{note.description}</p>
+            <button onClick={() => deleteNote(note.id)}>Delete note</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
