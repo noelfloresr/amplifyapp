@@ -3,7 +3,6 @@ import "../App.css";
 import { listNotes } from "../graphql/queries";
 import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from "../graphql/mutations";
 import { API } from "aws-amplify";
-import { GraphQLResult } from "@aws-amplify/api-graphql";
 
 interface INote {
   id: string;

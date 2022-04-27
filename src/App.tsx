@@ -1,5 +1,3 @@
-import React from "react";
-import logo from "./logo.svg";
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import "./App.css";
@@ -14,8 +12,7 @@ function App() {
         {({ signOut, user }) => (
           <div>
             <header>
-              {user && user.username}{" "}
-              <button onClick={signOut}>Sign out</button>
+              {user && user.username} <button onClick={signOut}>Sign out</button>
             </header>
             <Notes />
           </div>
