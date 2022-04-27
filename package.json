@@ -12,8 +12,10 @@
     "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.2",
     "aws-amplify": "^4.3.20",
+    "mapbox-gl": "^1.13.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-map-gl": "^7.0.11",
     "react-scripts": "5.0.1",
     "typescript": "^4.6.3",
     "web-vitals": "^2.1.4"
