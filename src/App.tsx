@@ -1,14 +1,26 @@
 import React from "react";
 import logo from "./logo.svg";
+import { Authenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 import "./App.css";
+import Notes from "./components/Notes";
+
+const customStyle = {};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hi, version 2</h1>
-      </header>
+    <div style={customStyle}>
+      <Authenticator>
+        {({ signOut, user }) => (
+          <div>
+            <header>
+              {user && user.username}{" "}
+              <button onClick={signOut}>Sign out</button>
+            </header>
+            <Notes />
+          </div>
+        )}
+      </Authenticator>
     </div>
   );
 }

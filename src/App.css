@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+@media (min-width: 30rem){
+  [data-amplify-authenticator] {
+      display: flex;
+      justify-content: center;
+      padding-top: 100px;
+      width: 100%;
+  }
+}
