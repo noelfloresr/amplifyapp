@@ -1,7 +1,11 @@
 import { FC, useState, useEffect } from "react";
 import "../App.css";
 import { listNotes } from "../graphql/queries";
-import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from "../graphql/mutations";
+import {
+  createNote as createNoteMutation,
+  deleteNote as deleteNoteMutation,
+  updateNote as updateNoteMutation,
+} from "../graphql/mutations";
 import { API } from "aws-amplify";
 
 interface INote {
@@ -11,6 +15,7 @@ interface INote {
 }
 
 const initialFormState = {
+  id: "",
   name: "",
   description: "",
 };
@@ -33,6 +38,26 @@ const Notes: FC = () => {
     await API.graphql({
       query: createNoteMutation,
       variables: { input: formData },
+    });
+    setFormData(initialFormState);
+    fetchNotes();
+  };
+
+  const loadNoteToUpdate = async (note: INote) => {
+    console.log("note", note);
+    setFormData(note);
+  };
+
+  const updateNote = async () => {
+    await API.graphql({
+      query: updateNoteMutation,
+      variables: {
+        input: {
+          id: formData.id,
+          name: formData.name,
+          description: formData.description,
+        },
+      },
     });
     setFormData(initialFormState);
     fetchNotes();
@@ -63,12 +88,14 @@ const Notes: FC = () => {
         value={formData.description}
       />
       <button onClick={createNote}>Create Note</button>
+      <button onClick={updateNote}>Update Note</button>
       <div style={{ marginBottom: 30 }}>
         {notes.map((note: INote) => (
           <div key={note.id || note.name}>
             <h2>{note.name}</h2>
             <p>{note.description}</p>
             <button onClick={() => deleteNote(note.id)}>Delete note</button>
+            <button onClick={() => loadNoteToUpdate(note)}>Edit note</button>
           </div>
         ))}
       </div>
