@@ -50,7 +50,7 @@ const Notes: FC = () => {
 
   return (
     <div>
-      <h1>My Notes API</h1>
+      <h1>My Notes API!</h1>
       <input
         type="text"
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
