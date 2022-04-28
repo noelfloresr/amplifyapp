@@ -112,7 +112,9 @@ const Notes: FC = () => {
         placeholder="Note description"
         value={formData.description}
       />
-      <input type="file" onChange={onChange} value={formData.image} />
+
+      <input type="file" onChange={onChange} />
+
       <button onClick={createNote}>Create Note</button>
       <button onClick={updateNote}>Update Note</button>
       <div style={{ marginBottom: 30 }}>
